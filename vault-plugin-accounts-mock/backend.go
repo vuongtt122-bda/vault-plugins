@@ -156,7 +156,7 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// var result map[string]interface{}
 	// json.Unmarshal([]byte(req.Data), &result)
 
-	buf, err := json.Marshal(time.Now())
+	buf, err := json.Marshal(req.Data)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}

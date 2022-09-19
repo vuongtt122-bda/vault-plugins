@@ -8,15 +8,14 @@ $ vault secrets enable -path=mock-accounts vault-plugin-accounts-mock
 
 $ vault secrets list
 
-$ vault write mock-accounts/hello message="Hello World"
-$ vault write mock-accounts/var1 message="{id: 'hello world'}"
 vault write mock-accounts/[key] message="[value]"
-
-$ vault read mock-accounts/hello
 vault read mock-accounts/[key]
-
-$ vault delete mock-accounts/hello
 vault delete mock-accounts/[key]
 
 $ vault secrets disable mock-accounts
 
+
+
+
+vault write mock-accounts/khong message=`{"idx":"khong","accountID":"test10000.dinar"}`
+vault read mock-accounts/khong
