@@ -142,14 +142,14 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// fmt.Println("req.Data is %v",req.Data)
 	// fmt.Println("req.Data is of type %T", req.Data)
 
-	logger := hclog.New(&hclog.LoggerOptions{})
-	logger.Info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+	// logger := hclog.New(&hclog.LoggerOptions{})
+	// logger.Info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 
 	// hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
 	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
 
-	buf, err := json.Marshal(req.Data)
+	buf, err := json.Marshal(req.Data.id)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}

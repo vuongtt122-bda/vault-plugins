@@ -9,6 +9,7 @@ $ vault secrets enable -path=mock-accounts vault-plugin-accounts-mock
 $ vault secrets list
 
 $ vault write mock-accounts/hello message="Hello World"
+$ vault write mock-accounts/var1 message="{id: 'hello world'}"
 vault write mock-accounts/[key] message="[value]"
 
 $ vault read mock-accounts/hello
