@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"strings"
 
-	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/vault/sdk/framework"
 	"github.com/hashicorp/vault/sdk/helper/jsonutil"
@@ -142,7 +141,10 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// JSON encode the data
 	// fmt.Println("req.Data is %v",req.Data)
 	// fmt.Println("req.Data is of type %T", req.Data)
-	hclog.Default().Info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+
+	logger := hclog.New(&hclog.LoggerOptions{})
+	logger.Info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+
 	// hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
 	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
