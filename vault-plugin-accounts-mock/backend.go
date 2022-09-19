@@ -142,8 +142,9 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// JSON encode the data
 	// fmt.Println("req.Data is %v",req.Data)
 	// fmt.Println("req.Data is of type %T", req.Data)
-	hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
-	hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
+	hclog.Default().Info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+	// hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
+	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
 
 	buf, err := json.Marshal(req.Data)
