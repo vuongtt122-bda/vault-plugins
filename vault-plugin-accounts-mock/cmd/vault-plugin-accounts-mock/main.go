@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/hashicorp/go-hclog"
-	mock "https://github.com/vuongtt122/vault-plugins/vault-plugin-accounts-mock"
+	mock "github.com/vuongtt122/vault-plugins/vault-plugin-accounts-mock"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
 )
