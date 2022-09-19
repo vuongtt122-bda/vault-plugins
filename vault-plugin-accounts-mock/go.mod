@@ -1,4 +1,4 @@
-module github.com/hashicorp/vault-guides/plugins/vault-plugin-secrets-mock
+module github.com/vuongtt122/vault-plugins/vault-plugin-accounts-mock
 
 go 1.12
 
