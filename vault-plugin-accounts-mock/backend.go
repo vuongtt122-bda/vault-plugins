@@ -139,6 +139,8 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	path := data.Get("path").(string)
 
 	// JSON encode the data
+	fmt.Println("req.Data is %v\n",req.Data)
+	fmt.Printf("req.Data is of type %T\n", req.Data)
 	buf, err := json.Marshal(req.Data)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
