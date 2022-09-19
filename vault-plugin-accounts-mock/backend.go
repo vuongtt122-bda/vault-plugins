@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 
+	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/vault/sdk/framework"
 	"github.com/hashicorp/vault/sdk/helper/jsonutil"
@@ -139,8 +140,12 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	path := data.Get("path").(string)
 
 	// JSON encode the data
-	fmt.Println("req.Data is %v\n",req.Data)
-	fmt.Printf("req.Data is of type %T\n", req.Data)
+	// fmt.Println("req.Data is %v",req.Data)
+	// fmt.Println("req.Data is of type %T", req.Data)
+	hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
+	hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
+
+
 	buf, err := json.Marshal(req.Data)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)

@@ -1,7 +1,7 @@
 $ cd vault-plugin-accounts-mock
 $ go build -o vault/plugins/vault-plugin-accounts-mock cmd/vault-plugin-accounts-mock/main.go
-
 $ vault server -dev -dev-root-token-id=root -dev-plugin-dir=./vault/plugins
+
 $ export VAULT_ADDR='http://127.0.0.1:8200'
 $ vault login root
 $ vault secrets enable -path=mock-accounts vault-plugin-accounts-mock
