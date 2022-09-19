@@ -149,7 +149,7 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
 
-	buf, err := json.Marshal(req.Data.id)
+	buf, err := json.Marshal(req.Data.data)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}
