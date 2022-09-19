@@ -17,6 +17,11 @@ type backend struct {
 	*framework.Backend
 }
 
+type Bird struct {
+	Species     string `json:"birdType"`
+	Description string `json:"what it does"`
+}
+
 var _ logical.Factory = Factory
 
 // Factory configures and returns Mock backends
@@ -148,8 +153,10 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
 	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
+	var result map[string]interface{}
+	json.Unmarshal([]byte(req.Data), &result)
 
-	buf, err := json.Marshal(req.Data.data)
+	buf, err := json.Marshal(result["birds"])
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}
