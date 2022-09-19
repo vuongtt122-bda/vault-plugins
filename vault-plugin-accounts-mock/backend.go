@@ -153,10 +153,10 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// hclog.Default().Info(fmt.Sprintf("req.Data is %v",req.Data))
 	// hclog.Default().Info(fmt.Sprintf("req.Data is of type %T",req.Data))
 
-	var result map[string]interface{}
-	json.Unmarshal([]byte(req.Data), &result)
+	// var result map[string]interface{}
+	// json.Unmarshal([]byte(req.Data), &result)
 
-	buf, err := json.Marshal(result["birds"])
+	buf, err := json.Marshal(time.Now())
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}
