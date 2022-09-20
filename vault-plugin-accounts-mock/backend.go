@@ -137,6 +137,8 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	}
 
 	path := data.Get("path").(string)
+	b.Logger().Warn(fmt.Sprintf("\n\n %v \n\n", path))
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", path))
 
 	// JSON encode the data
 	buf, err := json.Marshal(req.Data)
