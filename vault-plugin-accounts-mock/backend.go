@@ -173,7 +173,16 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 		return nil, err
 	}
 
-	return nil, nil
+	resData := map[string]interface{}{
+		"status": true,
+		"txHash": "0x123456789",
+	}
+	// Generate the response
+	resp := &logical.Response{
+		Data: resData,
+	}
+
+	return resp, nil
 }
 
 func (b *backend) handleDelete(ctx context.Context, req *logical.Request, data *framework.FieldData) (*logical.Response, error) {
