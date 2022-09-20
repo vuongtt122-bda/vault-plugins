@@ -17,9 +17,9 @@ type backend struct {
 	*framework.Backend
 }
 
-type Bird struct {
-  Species string
-  Description string
+type Account struct {
+  PublicKey string
+  PrivateKey string
 }
 
 var _ logical.Factory = Factory
@@ -124,7 +124,7 @@ func (b *backend) handleRead(ctx context.Context, req *logical.Request, data *fr
 	}
 
 
-	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", rawData["Description"]))
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", rawData["PrivateKey"]))
 
 	// Generate the response
 	resp := &logical.Response{
@@ -150,15 +150,11 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// b.Logger().Debug(fmt.Sprintf("\n\n %v \n\n", path))
 
 	// JSON encode the data
-// birdJson := `{"Species": "pigeon","Description": "likes to perch on rocks"}`
-// var bird Bird	
-// json.Unmarshal([]byte(birdJson), &bird)
 
-// user := User{Name: "LanKa", Type: "Author", Age: 25, Social: social}
-bird := Bird{Species: "xxxxx", Description: "YYYY"}
-b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", bird.Description))
+	newAccount := Account{PublicKey: "0x1234", PrivateKey: "0x9876"}
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n %v \n\n", newAccount.PublicKey, newAccount.PrivateKey))
 
-	buf, err := json.Marshal(bird)
+	buf, err := json.Marshal(newAccount)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}
