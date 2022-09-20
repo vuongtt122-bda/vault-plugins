@@ -18,8 +18,9 @@ type backend struct {
 }
 
 type Account struct {
-  PublicKey string
-  PrivateKey string
+	AccountId string
+	PublicKey string
+	PrivateKey string
 }
 
 var _ logical.Factory = Factory
@@ -65,6 +66,10 @@ func (b *backend) paths() []*framework.Path {
 				"path": {
 					Type:        framework.TypeString,
 					Description: "Specifies the path of the secret.",
+				},
+				"accountId": {
+					Type:        framework.TypeString,
+					Description: "Specifies the accountId of the secret.",
 				},
 			},
 
@@ -149,14 +154,15 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	}
 
 	path := data.Get("path").(string)
+	accountId := data.Get("accountId").(string)
 	// b.Logger().Warn(fmt.Sprintf("\n\n %v \n\n", path))
 	// b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", path))
 	// b.Logger().Debug(fmt.Sprintf("\n\n %v \n\n", path))
 
 	// JSON encode the data
 
-	newAccount := Account{PublicKey: "0x1234", PrivateKey: "0x9876"}
-	b.Logger().Info(fmt.Sprintf("\n\n %v \n %v \n\n", newAccount.PublicKey, newAccount.PrivateKey))
+	newAccount := Account{AccountId: accountId, PublicKey: "0x1234", PrivateKey: "0x9876"}
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n %v \n %v \n\n", newAccount.AccountId, newAccount.PublicKey, newAccount.PrivateKey))
 
 	buf, err := json.Marshal(newAccount)
 	if err != nil {
@@ -174,8 +180,9 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	}
 
 	resData := map[string]interface{}{
+		"accountId": newAccount.AccountId,
 		"status": true,
-		"txHash": "0x123456789",
+		"txHash": newAccount.PrivateKey,
 	}
 	// Generate the response
 	resp := &logical.Response{
