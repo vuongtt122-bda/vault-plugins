@@ -108,7 +108,7 @@ func (b *backend) handleRead(ctx context.Context, req *logical.Request, data *fr
 	path := data.Get("path").(string)
 
 	// Decode the data
-	var rawData map[string]interface{}
+	var rawData Account
 	entry, err := req.Storage.Get(ctx, req.ClientToken + "/" + path)
 	if err != nil {
 		return nil, err
@@ -124,11 +124,15 @@ func (b *backend) handleRead(ctx context.Context, req *logical.Request, data *fr
 	}
 
 
-	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", rawData["PrivateKey"]))
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", rawData.PrivateKey))
 
+	signatureEncode64 := rawData.PrivateKey + "-" + rawData.PublicKey
+	resData := map[string]interface{}{
+		"signatureEncode64": signatureEncode64,
+	}
 	// Generate the response
 	resp := &logical.Response{
-		Data: rawData,
+		Data: resData,
 	}
 
 	return resp, nil
