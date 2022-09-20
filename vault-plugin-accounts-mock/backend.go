@@ -123,6 +123,9 @@ func (b *backend) handleRead(ctx context.Context, req *logical.Request, data *fr
 		return nil, errwrap.Wrapf("json decoding failed: {{err}}", err)
 	}
 
+
+	b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", rawData["Description"]))
+
 	// Generate the response
 	resp := &logical.Response{
 		Data: rawData,
@@ -147,9 +150,13 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// b.Logger().Debug(fmt.Sprintf("\n\n %v \n\n", path))
 
 	// JSON encode the data
-birdJson := `{"Species": "pigeon","Description": "likes to perch on rocks"}`
-var bird Bird	
-json.Unmarshal([]byte(birdJson), &bird)
+// birdJson := `{"Species": "pigeon","Description": "likes to perch on rocks"}`
+// var bird Bird	
+// json.Unmarshal([]byte(birdJson), &bird)
+
+// user := User{Name: "LanKa", Type: "Author", Age: 25, Social: social}
+bird := Bird{Species: "xxxxx", Description: "YYYY"}
+b.Logger().Info(fmt.Sprintf("\n\n %v \n\n", bird.Description))
 
 	buf, err := json.Marshal(bird)
 	if err != nil {
