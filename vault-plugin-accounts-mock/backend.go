@@ -17,6 +17,11 @@ type backend struct {
 	*framework.Backend
 }
 
+type Bird struct {
+  Species string
+  Description string
+}
+
 var _ logical.Factory = Factory
 
 // Factory configures and returns Mock backends
@@ -104,7 +109,7 @@ func (b *backend) handleRead(ctx context.Context, req *logical.Request, data *fr
 
 	// Decode the data
 	var rawData map[string]interface{}
-	entry, err := req.Storage.Get(ctx, req.ClientToken+"/"+path)
+	entry, err := req.Storage.Get(ctx, req.ClientToken + "/" + path)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +147,11 @@ func (b *backend) handleWrite(ctx context.Context, req *logical.Request, data *f
 	// b.Logger().Debug(fmt.Sprintf("\n\n %v \n\n", path))
 
 	// JSON encode the data
-	buf, err := json.Marshal(req.Data)
+birdJson := `{"Species": "pigeon","Description": "likes to perch on rocks"}`
+var bird Bird	
+json.Unmarshal([]byte(birdJson), &bird)
+
+	buf, err := json.Marshal(bird)
 	if err != nil {
 		return nil, errwrap.Wrapf("json encoding failed: {{err}}", err)
 	}
@@ -168,7 +177,7 @@ func (b *backend) handleDelete(ctx context.Context, req *logical.Request, data *
 	path := data.Get("path").(string)
 
 	// Remove entry for specified path
-	if err := req.Storage.Delete(ctx, req.ClientToken+"/"+path); err != nil {
+	if err := req.Storage.Delete(ctx, req.ClientToken + "/" + path); err != nil {
 		return nil, err
 	}
 
