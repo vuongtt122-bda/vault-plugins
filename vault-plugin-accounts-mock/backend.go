@@ -54,7 +54,7 @@ func newBackend() (*backend, error) {
 func (b *backend) paths() []*framework.Path {
 	return []*framework.Path{
 		{
-			Pattern: framework.MatchAllRegex("path"),
+			Pattern: "account" + framework.MatchAllRegex("path"),
 
 			Fields: map[string]*framework.FieldSchema{
 				"path": {
